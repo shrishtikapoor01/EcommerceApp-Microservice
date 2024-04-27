@@ -1,14 +1,11 @@
 pipeline {
-    agent {
-        label 'ec2'
-    }
-
+    agent any
     stages {
         stage('Build & Tag Docker Image') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t jinny1/productcatalogservice:latest ."
+                        sh "docker build -t shrishtikapoor/productcatalogservice:latest ."
                     }
                 }
             }
@@ -18,7 +15,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push jinny1/productcatalogservice:latest "
+                        sh "docker push shrishtikapoor/productcatalogservice:latest "
                     }
                 }
             }
